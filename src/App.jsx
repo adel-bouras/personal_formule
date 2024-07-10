@@ -13,7 +13,7 @@ function App() {
     Physics:false
   });
   const [url,seturl]=useState("");
-  const [file,setfile]=useState("");
+  const [file,setfile]=useState(null);
   const [choice,setchoice]=useState("");
   const [about,setabout]=useState("");
 
@@ -24,7 +24,7 @@ function App() {
     setchoice(event.target.value);
   }
   function filehandl(event){
-    setfile(event.target.value);
+    setfile(event.target.files[0]);
   }
   function phonehandl(event){
     setphone(event.target.value);
@@ -67,8 +67,8 @@ function App() {
                     <input checked={subject.Maths} onChange={(e)=>{setsubject(previ=>({...previ,Maths:e.target.checked}))}} className='chck' type="checkbox" name='sub' value="Math" /> Maths
                     <input checked={subject.Physics} onChange={(e)=>{setsubject(previ=>({...previ,Physics:e.target.checked}))}} className='chck' type="checkbox" name='sub' value="Physics" /> Physics
           </div>
-          <label htmlFor="url">select your resume*</label>
-                    <input value={file} onChange={filehandl} id='file' type="file" />
+          <label htmlFor="file">select your resume*</label>
+                    <input onChange={filehandl} id='file' type="file" onClick={(e)=>{console.log(e)}} />
           <label htmlFor="url">Enter your url*</label>
                     <input value={url} onChange={urlhandl} type="text" placeholder='Enter url'/>
           <label htmlFor="choice">Select your choice*</label> <br />
@@ -102,7 +102,7 @@ function App() {
             });
             setabout("");
             setgender("Male");
-            setfile("");
+            setfile(null);
             setchoice("");
       }}>Reset</button>
       <button type='submite' onClick={()=>{
